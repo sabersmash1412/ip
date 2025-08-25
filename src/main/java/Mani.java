@@ -27,18 +27,21 @@ public class Mani {
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("todo")) {
+                text = text.substring(5).trim();
                 System.out.println(memory.addTask(new Todo(text)));
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("deadline")) {
                 int index = text.indexOf("/by");
                 String task = text.split("/")[0].trim();
+                task = task.substring(9).trim();
 
                 System.out.println(memory.addTask(new Deadline(task, text.substring(index + 3).trim())));
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("event")) {
                 String task = text.split("/")[0].trim();
+                task = task.substring(6).trim();
                 int firstIndex = text.indexOf("/from") + 5;
                 int secondIndex = text.indexOf("/to");
                 String from = text.substring(firstIndex, secondIndex).trim();
