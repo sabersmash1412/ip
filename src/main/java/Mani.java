@@ -26,7 +26,29 @@ public class Mani {
                 }
                 text = sc.nextLine();
                 continue;
+            } else if (text.contains("todo")) {
+                System.out.println(memory.addTask(new Todo(text)));
+                text = sc.nextLine();
+                continue;
+            } else if (text.contains("deadline")) {
+                int index = text.indexOf("/by");
+                String task = text.split("/")[0].trim();
+
+                System.out.println(memory.addTask(new Deadline(task, text.substring(index + 3).trim())));
+                text = sc.nextLine();
+                continue;
+            } else if (text.contains("event")) {
+                String task = text.split("/")[0].trim();
+                int firstIndex = text.indexOf("/from") + 5;
+                int secondIndex = text.indexOf("/to");
+                String from = text.substring(firstIndex, secondIndex).trim();
+                String to = text.substring(secondIndex + 3).trim();
+
+                System.out.println(memory.addTask(new Event(task, from, to)));
+                text = sc.nextLine();
+                continue;
             }
+
             System.out.println("added: " + text);
             memory.addTask(new Task(text));
             text = sc.nextLine();

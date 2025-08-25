@@ -7,9 +7,10 @@ public class TaskList {
         this.count = 0;
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskList[count] = task;
         this.count++;
+        return "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + String.valueOf(this.count) + " tasks in the list.";
     }
 
     public String markTask(int i) {
