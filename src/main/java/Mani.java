@@ -26,34 +26,81 @@ public class Mani {
                 }
                 text = sc.nextLine();
                 continue;
-            } else if (text.contains("todo")) {
+            }
+
+            if (text.contains("todo") || text.contains("deadline") || text.contains("event")) {
+                String[] parts = text.split(" ", 2);
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    System.out.println("Error: There is no task provided, description is empty.");
+                    text = sc.nextLine();
+                    continue;
+                }
+            }
+
+            if (text.contains("todo")) {
                 text = text.substring(5).trim();
                 System.out.println(memory.addTask(new Todo(text)));
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("deadline")) {
+                if (!text.contains("/by")) {
+                    System.out.println("Error: Use command /by");
+                    text = sc.nextLine();
+                    continue;
+                }
                 int index = text.indexOf("/by");
                 String task = text.split("/")[0].trim();
+                if (task.length() < 10) {
+                    System.out.println("Error: No task provided.");
+                    text = sc.nextLine();
+                    continue;
+                }
                 task = task.substring(9).trim();
+                String date = text.substring(index + 3).trim();
 
-                System.out.println(memory.addTask(new Deadline(task, text.substring(index + 3).trim())));
+
+                if (date.isEmpty()) {
+                    System.out.println("Error: No deadline provided.");
+                    text = sc.nextLine();
+                    continue;
+                }
+
+                System.out.println(memory.addTask(new Deadline(task, date)));
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("event")) {
+                if (!text.contains("/from") || !text.contains("/to")) {
+                    System.out.println("Error: Use commands /from and /to");
+                    text = sc.nextLine();
+                    continue;
+                }
+
                 String task = text.split("/")[0].trim();
+                if (task.length() < 7) {
+                    System.out.println("Error: No task provided.");
+                    text = sc.nextLine();
+                    continue;
+                }
                 task = task.substring(6).trim();
                 int firstIndex = text.indexOf("/from") + 5;
                 int secondIndex = text.indexOf("/to");
                 String from = text.substring(firstIndex, secondIndex).trim();
                 String to = text.substring(secondIndex + 3).trim();
 
+
+
+                if (from.isEmpty() || to.isEmpty()) {
+                    System.out.println("Error: From or To is not provided.");
+                    text = sc.nextLine();
+                    continue;
+                }
+
                 System.out.println(memory.addTask(new Event(task, from, to)));
                 text = sc.nextLine();
                 continue;
             }
 
-            System.out.println("added: " + text);
-            memory.addTask(new Task(text));
+            System.out.println("Error: There is no valid command provided.");
             text = sc.nextLine();
         }
 
