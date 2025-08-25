@@ -100,6 +100,14 @@ public class Mani {
                 continue;
             }
 
+            if (text.contains("delete")) {
+                char lastChar = text.charAt(text.length() - 1);
+                int lastInt = Character.getNumericValue(lastChar);
+                System.out.println(memory.deleteTask(lastInt - 1));
+                text = sc.nextLine();
+                continue;
+            }
+
             System.out.println("Error: There is no valid command provided.");
             text = sc.nextLine();
         }

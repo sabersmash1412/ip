@@ -43,4 +43,7 @@ Now you have 4 tasks in the list.
 Error: No task provided.
 Error: From or To is not provided.
 Error: From or To is not provided.
+Noted. I've removed this task:
+[T][X] borrow book
+Now you have 3 tasks in the list.
 Bye. Hope to see you again soon!

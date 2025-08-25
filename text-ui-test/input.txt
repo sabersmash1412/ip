@@ -16,4 +16,5 @@ deadline a /by b
 event /from /to
 event a /from /to
 event a /from b /to
+delete 1
 bye
