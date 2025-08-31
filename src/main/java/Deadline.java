@@ -1,9 +1,21 @@
+import java.io.IOException;
+
 public class Deadline extends Task{
     private String deadline;
 
     public Deadline(String task, String date) {
         super(task);
         this.deadline = date;
+    }
+
+    public Deadline(String task, String date, boolean mark){
+        super(task, mark);
+        this.deadline = date;
+    }
+
+    @Override
+    public String getDetails() {
+        return "D" + " | " + super.getDetails() + " | " + this.deadline;
     }
 
     @Override

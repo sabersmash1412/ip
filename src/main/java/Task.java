@@ -1,10 +1,15 @@
 public class Task {
     private String task;
-    public boolean mark;
+    private boolean mark;
 
     public Task(String task) {
         this.task = task;
         this.mark = false;
+    }
+
+    public Task(String task, boolean mark) {
+        this.task = task;
+        this.mark = mark;
     }
 
     public String markTask() {
@@ -15,6 +20,11 @@ public class Task {
     public String unmarkTask() {
         this.mark = false;
         return this.toString();
+    }
+
+    public String getDetails() {
+        String num = mark ? "1" : "0";
+        return num + " | " + task;
     }
 
     @Override
