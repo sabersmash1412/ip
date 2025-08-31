@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Mani {
@@ -6,6 +7,11 @@ public class Mani {
         Scanner sc = new Scanner(System.in);
 
         TaskList memory = new TaskList();
+        try {
+            memory = new TaskList(Storage.loadTasks("./data/mani.txt"));
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         System.out.println("Hello! I'm Mani");
         System.out.println("What can I do for you?");
@@ -18,8 +24,8 @@ public class Mani {
                 text = sc.nextLine();
                 continue;
             } else if (text.contains("mark")) {
-                char lastChar = text.charAt(text.length() - 1);
-                int lastInt = Character.getNumericValue(lastChar);
+                String[] parts = text.split(" ");
+                int lastInt = Integer.parseInt(parts[1]);
                 if (text.contains("unmark")) {
                     System.out.println(memory.unmarkTask(lastInt));
                 } else {
@@ -102,8 +108,8 @@ public class Mani {
             }
 
             if (text.contains("delete")) {
-                char lastChar = text.charAt(text.length() - 1);
-                int lastInt = Character.getNumericValue(lastChar);
+                String[] parts = text.split(" ");
+                int lastInt = Integer.parseInt(parts[1]);
                 System.out.println(memory.deleteTask(lastInt - 1));
                 text = sc.nextLine();
                 continue;

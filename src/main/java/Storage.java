@@ -86,6 +86,31 @@ public class Storage {
         }
     }
 
+    public static ArrayList<Task> loadTasks(String filePath) throws IOException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<String> lines = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        while (s.hasNext()) {
+            lines.add(s.nextLine());
+        }
+        s.close();
+
+        for (String line : lines) {
+            String[] parts = line.split(" \\| ");
+            if (parts[0].equals("T")) {
+                tasks.add(new Todo(parts[2], parts[1].equals("1")));
+            } else if (parts[0].equals("D")) {
+                tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
+            } else {
+                tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1")));
+            }
+        }
+
+        return tasks;
+    }
+
     public static void main(String[] args) {
 
         String file2 = "./data/mani.txt";

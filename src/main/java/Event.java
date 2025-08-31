@@ -10,6 +10,12 @@ public class Event extends Task{
         this.to = to;
     }
 
+    public Event(String task, String from, String to, boolean mark){
+        super(task, mark);
+        this.from = from;
+        this.to = to;
+    }
+
     @Override
     public String getDetails() {
         return "E" + " | " + super.getDetails() + " | " + this.from + " | " + this.to;

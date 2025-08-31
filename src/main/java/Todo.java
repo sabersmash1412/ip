@@ -6,6 +6,10 @@ public class Todo extends Task{
         super(task);
     }
 
+    public Todo(String task, boolean mark){
+        super(task, mark);
+    }
+
     @Override
     public String getDetails() {
         return "T" + " | " + super.getDetails();

@@ -7,6 +7,11 @@ public class Task {
         this.mark = false;
     }
 
+    public Task(String task, boolean mark) {
+        this.task = task;
+        this.mark = mark;
+    }
+
     public String markTask() {
         this.mark = true;
         return this.toString();

@@ -10,6 +10,11 @@ public class TaskList {
         this.count = 0;
     }
 
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+        this.count = taskList.size();
+    }
+
     public String addTask(Task task) {
         this.taskList.add(task);
         this.count++;
