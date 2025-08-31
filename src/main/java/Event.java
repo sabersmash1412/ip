@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Event extends Task{
     private String from;
     private String to;
@@ -6,6 +8,11 @@ public class Event extends Task{
         super(task);
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public String getDetails() {
+        return "E" + " | " + super.getDetails() + " | " + this.from + " | " + this.to;
     }
 
     @Override

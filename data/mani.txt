@@ -1,0 +1,11 @@
+T | 0 | borrow
+T | 1 | borrow
+T | 0 | borrow
+T | 0 | daaas
+T | 0 | daaa
+T | 0 | borrow
+T | 0 | borrow
+T | 0 | br
+T | 0 | gr
+T | 0 | a
+T | 0 | b

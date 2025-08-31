@@ -1,6 +1,6 @@
 public class Task {
     private String task;
-    public boolean mark;
+    private boolean mark;
 
     public Task(String task) {
         this.task = task;
@@ -15,6 +15,11 @@ public class Task {
     public String unmarkTask() {
         this.mark = false;
         return this.toString();
+    }
+
+    public String getDetails() {
+        String num = mark ? "1" : "0";
+        return num + " | " + task;
     }
 
     @Override

@@ -1,7 +1,14 @@
+import java.io.IOException;
+
 public class Todo extends Task{
 
     public Todo(String task) {
         super(task);
+    }
+
+    @Override
+    public String getDetails() {
+        return "T" + " | " + super.getDetails();
     }
 
     @Override
