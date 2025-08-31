@@ -88,6 +88,17 @@ public class Storage {
 
     public static ArrayList<Task> loadTasks(String filePath) throws IOException {
         File f = new File(filePath);
+        File parentDir = f.getParentFile();
+
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+        if (!f.exists()) {
+            f.createNewFile();
+            return new ArrayList<>();
+        }
+
         Scanner s = new Scanner(f);
         ArrayList<String> lines = new ArrayList<>();
         ArrayList<Task> tasks = new ArrayList<>();
