@@ -1,16 +1,20 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Deadline extends Task{
-    private String deadline;
+    private LocalDateTime deadline;
+    private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
 
     public Deadline(String task, String date) {
         super(task);
-        this.deadline = date;
+        this.deadline = LocalDateTime.parse(date, inputFormatter);
     }
 
     public Deadline(String task, String date, boolean mark){
         super(task, mark);
-        this.deadline = date;
+        this.deadline = LocalDateTime.parse(date);
     }
 
     @Override
@@ -20,6 +24,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH)) + ")";
     }
 }
