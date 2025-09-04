@@ -1,3 +1,10 @@
+package mani.parser;
+import mani.task.TaskList;
+import mani.ui.Ui;
+import mani.task.Todo;
+import mani.task.Event;
+import mani.task.Deadline;
+
 public class Parser {
 
     public static boolean parse(String userCommand, Ui ui, TaskList memory) {

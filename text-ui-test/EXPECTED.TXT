@@ -1,4 +1,4 @@
-Hello! I'm Mani
+Hello! I'm mani.ui.Mani
 What can I do for you?
 Got it. I've added this task:
 [T][ ] borrow book

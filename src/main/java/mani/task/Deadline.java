@@ -1,9 +1,10 @@
-import java.io.IOException;
+package mani.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDateTime deadline;
     private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
 

@@ -1,5 +1,11 @@
+package mani.ui;
+
+import mani.storage.Storage;
+import mani.task.TaskList;
+
+import mani.parser.Parser;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Mani {
     private TaskList memory;

@@ -1,9 +1,10 @@
-import java.io.IOException;
+package mani.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
     private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);

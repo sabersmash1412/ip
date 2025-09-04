@@ -1,3 +1,10 @@
+package mani.storage;
+
+import mani.task.Deadline;
+import mani.task.Event;
+import mani.task.Task;
+import mani.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
