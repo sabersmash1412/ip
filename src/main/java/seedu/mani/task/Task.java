@@ -1,4 +1,4 @@
-package mani.task;
+package seedu.mani.task;
 
 public class Task {
     private String task;
@@ -27,6 +27,10 @@ public class Task {
     public String getDetails() {
         String num = mark ? "1" : "0";
         return num + " | " + task;
+    }
+
+    public boolean isDone() {
+        return this.mark;
     }
 
     @Override

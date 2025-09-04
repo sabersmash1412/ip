@@ -1,9 +1,9 @@
-package mani.storage;
+package seedu.mani.storage;
 
-import mani.task.Deadline;
-import mani.task.Event;
-import mani.task.Task;
-import mani.task.Todo;
+import seedu.mani.task.Deadline;
+import seedu.mani.task.Event;
+import seedu.mani.task.Task;
+import seedu.mani.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -97,7 +97,7 @@ public class Storage {
         File f = new File(filePath);
         File parentDir = f.getParentFile();
 
-        if (!parentDir.exists()) {
+        if (parentDir != null && !parentDir.exists()) {
             parentDir.mkdirs();
         }
 

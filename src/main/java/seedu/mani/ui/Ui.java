@@ -1,4 +1,4 @@
-package mani.ui;
+package seedu.mani.ui;
 
 import java.util.Scanner;
 

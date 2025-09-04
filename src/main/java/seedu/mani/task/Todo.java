@@ -1,4 +1,4 @@
-package mani.task;
+package seedu.mani.task;
 
 public class Todo extends Task {
 

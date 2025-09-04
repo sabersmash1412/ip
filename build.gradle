@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("mani.ui.Mani")
+    mainClass.set("seedu.mani.ui.Mani")
 }
 
 shadowJar {

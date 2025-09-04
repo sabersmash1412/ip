@@ -1,9 +1,9 @@
-package mani.ui;
+package seedu.mani.ui;
 
-import mani.storage.Storage;
-import mani.task.TaskList;
+import seedu.mani.storage.Storage;
+import seedu.mani.task.TaskList;
 
-import mani.parser.Parser;
+import seedu.mani.parser.Parser;
 
 import java.io.IOException;
 

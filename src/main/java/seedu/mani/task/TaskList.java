@@ -1,6 +1,6 @@
-package mani.task;
+package seedu.mani.task;
 
-import mani.storage.Storage;
+import seedu.mani.storage.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +59,10 @@ public class TaskList {
             System.out.println("Error: " + e.getMessage());
         }
         return "OK, I've marked this task as not done yet:\n" + this.taskList.get(i - 1).unmarkTask();
+    }
+
+    public int getNum() {
+        return this.taskList.size();
     }
 
 

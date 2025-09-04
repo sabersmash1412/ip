@@ -1,9 +1,9 @@
-package mani.parser;
-import mani.task.TaskList;
-import mani.ui.Ui;
-import mani.task.Todo;
-import mani.task.Event;
-import mani.task.Deadline;
+package seedu.mani.parser;
+import seedu.mani.task.TaskList;
+import seedu.mani.ui.Ui;
+import seedu.mani.task.Todo;
+import seedu.mani.task.Event;
+import seedu.mani.task.Deadline;
 
 public class Parser {
 
