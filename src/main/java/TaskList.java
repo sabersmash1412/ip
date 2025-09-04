@@ -19,7 +19,7 @@ public class TaskList {
         this.taskList.add(task);
         this.count++;
         try {
-            Storage.appendToFile("./data/mani.txt", task.getDetails() + "\n");
+            Storage.appendToFile("./data/tasks.txt", task.getDetails() + "\n");
         } catch (IOException e) {
             System.out.println("Error in saving to file: " + e.getMessage());
         }
@@ -29,7 +29,7 @@ public class TaskList {
     public String deleteTask(int i) {
         Task tmp = this.taskList.get(i);
         try {
-            Storage.deleteLine("./data/mani.txt", i);
+            Storage.deleteLine("./data/tasks.txt", i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -41,7 +41,7 @@ public class TaskList {
 
     public String markTask(int i) {
         try {
-            Storage.markTask("./data/mani.txt", i);
+            Storage.markTask("./data/tasks.txt", i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -50,7 +50,7 @@ public class TaskList {
 
     public String unmarkTask(int i) {
         try {
-            Storage.markTask("./data/mani.txt", i);
+            Storage.markTask("./data/tasks.txt", i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }

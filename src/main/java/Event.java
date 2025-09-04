@@ -27,6 +27,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH)) + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH)) + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy ha")) + ")";
     }
 }
