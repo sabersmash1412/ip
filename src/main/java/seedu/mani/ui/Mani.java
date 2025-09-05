@@ -7,10 +7,19 @@ import seedu.mani.parser.Parser;
 
 import java.io.IOException;
 
+/**
+ * Main class for the Mani task management application.
+ * Initializes the application and manages the main execution loop.
+ */
 public class Mani {
     private TaskList memory;
     private Ui ui;
 
+    /**
+     * Constructs a Mani instance and initializes the task list from storage.
+     *
+     * @param filePath
+     */
     public Mani(String filePath) {
         ui = new Ui();
         try {
@@ -21,6 +30,9 @@ public class Mani {
         }
     }
 
+    /**
+     * Runs the main application loop, processing user commands until exit.
+     */
     public void run() {
         ui.welcomeMessage();
 
@@ -33,6 +45,11 @@ public class Mani {
         ui.closeScanner();
     }
 
+    /**
+     * Main entry point of application.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Mani("data/tasks.txt").run();
     }

@@ -10,14 +10,25 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for Storage component for 2 of its non-trivial methods.
+ */
 public class StorageTest {
     private static final String TEST = "test.txt";
 
+    /**
+     * Sets up a test file before test execution
+     *
+     * @throws IOException
+     */
     @BeforeEach
     public void start() throws IOException {
         Storage.writeToFile(TEST, "");
     }
 
+    /**
+     * Cleans up test file after test.
+     */
     @AfterEach
     public void end() {
         File f = new File(TEST);
@@ -26,6 +37,11 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Tests appendToFile functionality by verifying content.
+     *
+     * @throws IOException
+     */
     @Test
     public void appendToFileTest() throws IOException {
         Storage.appendToFile(TEST, "test first line\n");
@@ -36,6 +52,11 @@ public class StorageTest {
         assertTrue(content.contains("test second line"));
     }
 
+    /**
+     * Tests loadTasks functionality by verifying if content is correctly loaded.
+     *
+     * @throws IOException
+     */
     @Test
     public void loadTaskTest() throws IOException {
         String data = "T | 0 | read book\nT | 1 | return book\n";

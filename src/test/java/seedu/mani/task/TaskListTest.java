@@ -3,9 +3,14 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Test class for the TaskList components.
+ */
 public class TaskListTest {
 
+    /**
+     * Tests the addTask functionality by verifying if task is added.
+     */
     @Test
     public void addTaskTest() {
         TaskList taskList = new TaskList();
@@ -17,6 +22,9 @@ public class TaskListTest {
         assertTrue(output.contains("I've added this task"));
     }
 
+    /**
+     * Tests deleteTask functionality by verifying a task is removed.
+     */
     @Test
     public void deleteTaskTest() {
         TaskList taskList = new TaskList();

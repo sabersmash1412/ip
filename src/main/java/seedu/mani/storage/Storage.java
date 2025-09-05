@@ -12,6 +12,11 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The Storage class is responsible for file operations.
+ * It ensures Task data is stored in a .txt after Mani is run.
+ * It ensures that the Task data is retrieved when Mani is run again.
+ */
 public class Storage {
 
     private static void printFileContents(String filePath) throws FileNotFoundException {
@@ -22,18 +27,39 @@ public class Storage {
         }
     }
 
+    /**
+     * When task list is changed, the data is overwritten in tasks.txt.
+     *
+     * @param filePath
+     * @param textToAdd
+     * @throws IOException
+     */
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * When task is added, the new task details are added to existing file.
+     *
+     * @param filePath
+     * @param textToAppend
+     * @throws IOException
+     */
     public static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * When task is deleted, the data is deleted from tasks.txt.
+     *
+     * @param filePath
+     * @param lineNum
+     * @throws IOException
+     */
     public static void deleteLine(String filePath, int lineNum) throws IOException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -58,6 +84,13 @@ public class Storage {
         }
     }
 
+    /**
+     * When task is marked as done, the task's status is marked done in tasks.txt.
+     *
+     * @param filePath
+     * @param lineNum
+     * @throws IOException
+     */
     public static void markTask(String filePath, int lineNum) throws IOException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -93,6 +126,13 @@ public class Storage {
         }
     }
 
+    /**
+     * When Mani is run, the task details stored in tasks.txt are retrieved,
+     *
+     * @param filePath
+     * @return
+     * @throws IOException
+     */
     public static ArrayList<Task> loadTasks(String filePath) throws IOException {
         File f = new File(filePath);
         File parentDir = f.getParentFile();
@@ -129,22 +169,4 @@ public class Storage {
         return tasks;
     }
 
-    public static void main(String[] args) {
-
-        String file2 = "./data/mani.txt";
-
-        try {
-            writeToFile(file2, "first ine" + System.lineSeparator() + "second line");
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-
-        try {
-            printFileContents("data/fruits.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-
-    }
 }

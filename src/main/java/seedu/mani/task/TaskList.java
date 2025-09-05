@@ -5,20 +5,32 @@ import seedu.mani.storage.Storage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks and handles operations on them.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private int count;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
         this.count = 0;
     }
 
+    /**
+     * Constructs a TaskList from an existing list of tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
         this.count = taskList.size();
     }
 
+    /**
+     * Adds a task to the list and updates storage.
+     */
     public String addTask(Task task) {
         this.taskList.add(task);
         this.count++;
@@ -30,6 +42,9 @@ public class TaskList {
         return "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + String.valueOf(this.count) + " tasks in the list.";
     }
 
+    /**
+     * Deletes a task from the list and updates storage.
+     */
     public String deleteTask(int i) {
         Task tmp = this.taskList.get(i);
         try {
@@ -43,6 +58,9 @@ public class TaskList {
         return "Noted. I've removed this task:\n" + tmp.toString() + "\nNow you have " + String.valueOf(this.count) + " tasks in the list.";
     }
 
+    /**
+     * Marks a task as done and updates storage.
+     */
     public String markTask(int i) {
         try {
             Storage.markTask("./data/tasks.txt", i);
@@ -52,6 +70,9 @@ public class TaskList {
         return "Nice! I've marked this task as done:\n" + this.taskList.get(i - 1).markTask();
     }
 
+    /**
+     * Marks a task as not done and updates storage.
+     */
     public String unmarkTask(int i) {
         try {
             Storage.markTask("./data/tasks.txt", i);

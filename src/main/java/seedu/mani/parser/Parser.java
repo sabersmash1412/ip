@@ -5,8 +5,21 @@ import seedu.mani.task.Todo;
 import seedu.mani.task.Event;
 import seedu.mani.task.Deadline;
 
+/**
+ * The Parser class is responsible for interpreting user commands.
+ * It takes the raw string command, breaks it down and facilitates
+ * the necessary output.
+ */
 public class Parser {
 
+    /**
+     * Parses through user's command and executes the operation as per input
+     *
+     * @param userCommand
+     * @param ui
+     * @param memory
+     * @return
+     */
     public static boolean parse(String userCommand, Ui ui, TaskList memory) {
         String[] words = userCommand.trim().split(" ", 2);
         String firstWord = words[0];
