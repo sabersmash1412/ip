@@ -87,6 +87,17 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public String findTask(String keyword) {
+        String header = "Here are the matching tasks in your list:\n";
+        String output = "";
+        for (Task task : this.taskList) {
+            if (task.toString().contains(keyword)) {
+                output = output + task.toString() + "\n";
+            }
+        }
+        return output.isEmpty() ? "No matching tasks" : header + output;
+    }
+
 
     @Override
     public String toString() {
