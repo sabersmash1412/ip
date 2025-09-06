@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Manages a list of tasks and handles operations on them.
  */
 public class TaskList {
+    private static final String FILE_PATH = "./data/tasks.txt";
     private ArrayList<Task> taskList;
     private int count;
 
@@ -35,7 +36,7 @@ public class TaskList {
         this.taskList.add(task);
         this.count++;
         try {
-            Storage.appendToFile("./data/tasks.txt", task.getDetails() + "\n");
+            Storage.appendToFile(FILE_PATH, task.getDetails() + "\n");
         } catch (IOException e) {
             System.out.println("Error in saving to file: " + e.getMessage());
         }
@@ -48,7 +49,7 @@ public class TaskList {
     public String deleteTask(int i) {
         Task tmp = this.taskList.get(i);
         try {
-            Storage.deleteLine("./data/tasks.txt", i);
+            Storage.deleteLine(FILE_PATH, i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -63,7 +64,7 @@ public class TaskList {
      */
     public String markTask(int i) {
         try {
-            Storage.markTask("./data/tasks.txt", i);
+            Storage.markTask(FILE_PATH, i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -75,7 +76,7 @@ public class TaskList {
      */
     public String unmarkTask(int i) {
         try {
-            Storage.markTask("./data/tasks.txt", i);
+            Storage.markTask(FILE_PATH, i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -89,11 +90,10 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i < count; i++) {
-            String line = String.valueOf(i + 1) + "." + taskList.get(i) + "\n";
-            result = result + line;
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            result.append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }
-        return result;
+        return result.toString();
     }
 }

@@ -1,16 +1,17 @@
 package seedu.mani.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import seedu.mani.task.Deadline;
 import seedu.mani.task.Event;
 import seedu.mani.task.Task;
 import seedu.mani.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * The Storage class is responsible for file operations.
@@ -19,7 +20,7 @@ import java.io.IOException;
  */
 public class Storage {
 
-    private static void printFileContents(String filePath) throws FileNotFoundException {
+    public static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -72,13 +73,13 @@ public class Storage {
 
         lines.remove(lineNum);
 
-        String text = "";
+        StringBuilder text = new StringBuilder();
         for (String line : lines) {
-            text = text + line + "\n";
+            text.append(line).append(System.lineSeparator());
         }
 
         try {
-            writeToFile(filePath, text);
+            writeToFile(filePath, text.toString());
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -122,7 +123,7 @@ public class Storage {
         try {
             writeToFile(filePath, text);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            throw new IOException("Error writing to file: " + filePath, e);
         }
     }
 
@@ -157,12 +158,32 @@ public class Storage {
 
         for (String line : lines) {
             String[] parts = line.split(" \\| ");
-            if (parts[0].equals("T")) {
-                tasks.add(new Todo(parts[2], parts[1].equals("1")));
-            } else if (parts[0].equals("D")) {
-                tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
-            } else {
-                tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1")));
+
+            if (parts.length < 3) {
+                System.out.println("Skipping invalid line: " + line);
+                continue;
+            }
+
+            switch (parts[0]) {
+                case "T":
+                    tasks.add(new Todo(parts[2], parts[1].equals("1")));
+                    break;
+                case "D":
+                    if (parts.length >= 4) {
+                        tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
+                    } else {
+                        System.out.println("Invalid Deadline line: " + line);
+                    }
+                    break;
+                case "E":
+                    if (parts.length >= 5) {
+                        tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1")));
+                    } else {
+                        System.out.println("Invalid Event line: " + line);
+                    }
+                    break;
+                default:
+                    System.out.println("Unknown task type: " + parts[0]);
             }
         }
 

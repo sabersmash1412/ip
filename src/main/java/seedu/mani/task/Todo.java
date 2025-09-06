@@ -20,13 +20,13 @@ public class Todo extends Task {
      * @param task
      * @param mark
      */
-    public Todo(String task, boolean mark){
+    public Todo(String task, boolean mark) {
         super(task, mark);
     }
 
     @Override
     public String getDetails() {
-        return "T" + " | " + super.getDetails();
+        return "T | " + super.getDetails();
     }
 
     @Override
