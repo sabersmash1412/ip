@@ -5,20 +5,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Event extends Task {
+    private static final DateTimeFormatter INPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
+    private static final DateTimeFormatter OUTPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH);
     private LocalDateTime from;
     private LocalDateTime to;
-    private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
 
     public Event(String task, String from, String to) {
         super(task);
-        this.from = LocalDateTime.parse(from, inputFormatter);
-        this.to = LocalDateTime.parse(to, inputFormatter);
+        this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
+        this.to = LocalDateTime.parse(to, INPUT_FORMATTER);
     }
 
     public Event(String task, String from, String to, boolean mark){
         super(task, mark);
-        this.from = LocalDateTime.parse(from);
-        this.to = LocalDateTime.parse(to);
+        this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
+        this.to = LocalDateTime.parse(to, INPUT_FORMATTER);
     }
 
     @Override
@@ -28,6 +31,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH)) + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy ha")) + ")";
+        return "[E]" + super.toString() + " (from: " + this.from.format(OUTPUT_FORMATTER) + " to: " + this.to.format(OUTPUT_FORMATTER) + ")";
     }
 }

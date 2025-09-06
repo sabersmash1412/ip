@@ -1,14 +1,15 @@
 package seedu.mani.storage;
-import org.junit.jupiter.api.*;
-import seedu.mani.task.Task;
-import seedu.mani.task.Todo;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import seedu.mani.task.Task;
+import seedu.mani.task.Todo;
 
 public class StorageTest {
     private static final String TEST = "test.txt";

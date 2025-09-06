@@ -25,8 +25,8 @@ public class Task {
     }
 
     public String getDetails() {
-        String num = mark ? "1" : "0";
-        return num + " | " + task;
+        String status = mark ? "1" : "0";
+        return status + " | " + task;
     }
 
     public boolean isDone() {

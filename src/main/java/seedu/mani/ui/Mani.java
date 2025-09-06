@@ -2,9 +2,7 @@ package seedu.mani.ui;
 
 import seedu.mani.storage.Storage;
 import seedu.mani.task.TaskList;
-
 import seedu.mani.parser.Parser;
-
 import java.io.IOException;
 
 public class Mani {
