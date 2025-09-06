@@ -95,6 +95,13 @@ public class Parser {
                 ui.systemMessage(memory.deleteTask(lastInt - 1));
                 return false;
 
+            case "find":
+                String[] findParts = remainingMessage.split(" ");
+                String keyword = findParts[0];
+                ui.systemMessage(memory.findTask(keyword));
+                return false;
+
+
             default:
                 ui.errorMessage("There is no valid command provided.");
                 return false;
