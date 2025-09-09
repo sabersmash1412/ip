@@ -43,6 +43,22 @@ public class Mani {
         ui.closeScanner();
     }
 
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
+        Parser.parse(input, new Ui() {
+            @Override
+            public void systemMessage(String message) {
+                response.append(message).append("\n");
+            }
+
+            @Override
+            public void errorMessage(String message) {
+                response.append("Error: ").append(message).append("\n");
+            }
+        }, memory);
+        return response.toString().trim();
+    }
+
     /**
      * Main entry point of application.
      *
