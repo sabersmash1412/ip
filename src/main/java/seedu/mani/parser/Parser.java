@@ -24,6 +24,11 @@ public class Parser {
      * @return
      */
     public static boolean parse(String userCommand, Ui ui, TaskList memory) {
+        if (userCommand == null || userCommand.trim().isEmpty()) {
+            ui.errorMessage("No command entered.");
+            return false;
+        }
+
         String[] words = userCommand.trim().split(" ", 2);
         String firstWord = words[0];
         String remainingMessage = words.length > 1 ? words[1] : "";
@@ -37,15 +42,23 @@ public class Parser {
                 return false;
 
             case "mark":
-                String[] markParts = remainingMessage.split(" ");
-                int markInt = Integer.parseInt(markParts[0]);
-                ui.systemMessage(memory.markTask(markInt));
+                try {
+                    String[] markParts = remainingMessage.split(" ");
+                    int markInt = Integer.parseInt(markParts[0]);
+                    ui.systemMessage(memory.markTask(markInt));
+                } catch (NumberFormatException e) {
+                    ui.errorMessage("Error: Please provide a valid task number.");
+                }
                 return false;
 
             case "unmark":
-                String[] unmarkParts = remainingMessage.split(" ");
-                int unmarkInt = Integer.parseInt(unmarkParts[0]);
-                ui.systemMessage(memory.unmarkTask(unmarkInt));
+                try {
+                    String[] unmarkParts = remainingMessage.split(" ");
+                    int unmarkInt = Integer.parseInt(unmarkParts[0]);
+                    ui.systemMessage(memory.unmarkTask(unmarkInt));
+                } catch (NumberFormatException e) {
+                    ui.errorMessage("Error: Please provide a valid task number.");
+                }
                 return false;
 
             case "todo":
@@ -58,17 +71,23 @@ public class Parser {
                 return handleEvent(remainingMessage, ui, memory);
 
             case "delete":
-                String[] parts = remainingMessage.split(" ");
-                int lastInt = Integer.parseInt(parts[0]);
-                ui.systemMessage(memory.deleteTask(lastInt - 1));
+                try {
+                    String[] parts = remainingMessage.split(" ");
+                    int lastInt = Integer.parseInt(parts[0]);
+                    ui.systemMessage(memory.deleteTask(lastInt - 1));
+                } catch (NumberFormatException e) {
+                    ui.errorMessage("Error: Please provide a valid task number.");
+                }
                 return false;
 
             case "find":
-                String[] findParts = remainingMessage.split(" ");
-                String keyword = findParts[0];
-                ui.systemMessage(memory.findTask(keyword));
+                String keyword = remainingMessage.trim();
+                if (keyword.isEmpty()) {
+                    ui.systemMessage("Error: No keyword provided.");
+                } else {
+                    ui.systemMessage(memory.findTask(keyword));
+                }
                 return false;
-
 
             default:
                 ui.errorMessage("There is no valid command provided.");
