@@ -13,6 +13,8 @@ public class Task {
      * @param task
      */
     public Task(String task) {
+        assert task != null : "Task description is null";
+        assert !task.trim().isEmpty() : "Task description is empty";
         this.task = task;
         this.mark = false;
     }
@@ -24,6 +26,8 @@ public class Task {
      * @param mark
      */
     public Task(String task, boolean mark) {
+        assert task != null : "Task description is null";
+        assert !task.trim().isEmpty() : "Task description is empty";
         this.task = task;
         this.mark = mark;
     }
@@ -33,6 +37,7 @@ public class Task {
      */
     public String markTask() {
         this.mark = true;
+        assert this.isDone() : "Task is not marked";
         return this.toString();
     }
 
@@ -41,6 +46,7 @@ public class Task {
      */
     public String unmarkTask() {
         this.mark = false;
+        assert !this.isDone() : "Task is not unmarked";
         return this.toString();
     }
 
