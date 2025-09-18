@@ -8,7 +8,7 @@ public class Todo extends Task {
     /**
      * Constructs a new Todo task with the specified description.
      *
-     * @param task
+     * @param task Descirp
      */
     public Todo(String task) {
         super(task);

@@ -8,42 +8,47 @@ import java.util.Locale;
  * Represents a task with a specific deadline.
  */
 public class Deadline extends Task {
+    private static final String TYPE = "D";
     private static final DateTimeFormatter INPUT_FORMATTER =
             DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
     private static final DateTimeFormatter OUTPUT_FORMATTER =
             DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH);
-    private LocalDateTime deadline;
+
+    private final LocalDateTime deadline;
 
     /**
      * Constructs a new Deadline task with the specified description and date string.
      *
-     * @param task
-     * @param date
+     * @param task Description of the deadline; must not be null or empty
+     * @param date Date-time string in format d/MM/yyyy HHmm
      */
     public Deadline(String task, String date) {
         super(task);
+        assert date != null : "Deadline date is null";
         this.deadline = LocalDateTime.parse(date, INPUT_FORMATTER);
     }
 
     /**
      * Constructs a Deadline task with specified description, date string, and completion status.
      *
-     * @param task
-     * @param date
-     * @param mark
+     * @param task Description of the deadline; must not be null or empty
+     * @param date Date-time string in format d/MM/yyyy HHmm
+     * @param mark True if task is completed, false otherwise
      */
     public Deadline(String task, String date, boolean mark){
         super(task, mark);
+        assert date != null : "Deadline date is null";
         this.deadline = LocalDateTime.parse(date, INPUT_FORMATTER);
     }
 
     @Override
     public String getDetails() {
-        return "D" + " | " + super.getDetails() + " | " + this.deadline;
+        return TYPE + " | " + super.getDetails() + " | " + this.deadline.format(INPUT_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(OUTPUT_FORMATTER) + ")";
+        return "[" + TYPE + "]" + super.toString() +
+                " (by: " + this.deadline.format(OUTPUT_FORMATTER) + ")";
     }
 }
