@@ -209,14 +209,14 @@ public class Storage {
                     break;
                 case "D":
                     if (parts.length >= 4) {
-                        tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1"), Integer.parseInt(parts[4])));
+                        tasks.add(new Deadline(parts[2], parts[4], parts[1].equals("1"), Integer.parseInt(parts[3])));
                     } else {
                         System.out.println("Invalid Deadline line: " + line);
                     }
                     break;
                 case "E":
                     if (parts.length >= 5) {
-                        tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1"), Integer.parseInt(parts[5])));
+                        tasks.add(new Event(parts[2], parts[4], parts[5], parts[1].equals("1"), Integer.parseInt(parts[3])));
                     } else {
                         System.out.println("Invalid Event line: " + line);
                     }
