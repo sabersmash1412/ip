@@ -98,6 +98,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Create a new Todo Task, and checks for errors in user input.
+     *
+     * @param remainingMessage
+     * @param ui
+     * @param memory
+     * @return
+     * @throws IOException
+     */
     private static boolean handleTodo(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
@@ -108,6 +117,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Create a new Deadline Task, and checks for errors in user input.
+     *
+     * @param remainingMessage
+     * @param ui
+     * @param memory
+     * @return
+     * @throws IOException
+     */
     private static boolean handleDeadline(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
@@ -136,6 +154,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Create a new Event Task, and checks for errors in user input.
+     *
+     * @param remainingMessage
+     * @param ui
+     * @param memory
+     * @return
+     * @throws IOException
+     */
     private static boolean handleEvent(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
