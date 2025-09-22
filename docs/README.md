@@ -1,6 +1,6 @@
 # Mani User Guide
 
-![UI Screenshot](docs/Ui.png)
+![UI Screenshot](Ui.png)
 
 Mani is a chatbot that will help you to take note of tasks, deadlines, and priorities in a simple and intuitive way.
 
