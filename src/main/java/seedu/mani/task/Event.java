@@ -39,8 +39,8 @@ public class Event extends Task {
      * @param to End date-time string in format d/MM/yyyy HHmm
      * @param mark True if task is completed, false otherwise
      */
-    public Event(String task, String from, String to, boolean mark) {
-        super(task, mark);
+    public Event(String task, String from, String to, boolean mark, int count) {
+        super(task, mark, count);
         this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
         this.to = LocalDateTime.parse(to, INPUT_FORMATTER);
         assert this.from.isBefore(this.to) : "Event 'from' must be before 'to'";

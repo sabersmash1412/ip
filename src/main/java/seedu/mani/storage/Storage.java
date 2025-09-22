@@ -128,6 +128,45 @@ public class Storage {
     }
 
     /**
+     * Everytime there's a duplicate, mani.txt updates its duplicate count.
+     *
+     * @param filePath
+     * @param lineNum
+     * @throws IOException
+     */
+    public static void increaseDuplicateCount(String filePath, int lineNum) throws IOException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<String> lines = new ArrayList<>();
+
+        while (s.hasNextLine()) {
+            lines.add(s.nextLine());
+        }
+        s.close();
+
+        String targetLine = lines.get(lineNum - 1);
+
+        String[] parts = targetLine.split(" \\| ");
+        if (parts.length != 4) {
+            throw new IOException("Unexpected file format at line " + lineNum);
+        }
+
+        int count = Integer.parseInt(parts[3].trim());
+        count++;
+        parts[3] = String.valueOf(count);
+
+        String updatedLine = String.join(" | ", parts);
+        lines.set(lineNum - 1, updatedLine);
+
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            sb.append(line).append("\n");
+        }
+
+        writeToFile(filePath, sb.toString());
+    }
+
+    /**
      * When Mani is run, the task details stored in tasks.txt are retrieved,
      *
      * @param filePath
@@ -166,18 +205,18 @@ public class Storage {
 
             switch (parts[0]) {
                 case "T":
-                    tasks.add(new Todo(parts[2], parts[1].equals("1")));
+                    tasks.add(new Todo(parts[2], parts[1].equals("1"), Integer.parseInt(parts[3])));
                     break;
                 case "D":
                     if (parts.length >= 4) {
-                        tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
+                        tasks.add(new Deadline(parts[2], parts[3], parts[1].equals("1"), Integer.parseInt(parts[4])));
                     } else {
                         System.out.println("Invalid Deadline line: " + line);
                     }
                     break;
                 case "E":
                     if (parts.length >= 5) {
-                        tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1")));
+                        tasks.add(new Event(parts[2], parts[3], parts[4], parts[1].equals("1"), Integer.parseInt(parts[5])));
                     } else {
                         System.out.println("Invalid Event line: " + line);
                     }

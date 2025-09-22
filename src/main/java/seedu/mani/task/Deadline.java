@@ -35,8 +35,8 @@ public class Deadline extends Task {
      * @param date Date-time string in format d/MM/yyyy HHmm
      * @param mark True if task is completed, false otherwise
      */
-    public Deadline(String task, String date, boolean mark){
-        super(task, mark);
+    public Deadline(String task, String date, boolean mark, int count){
+        super(task, mark, count);
         assert date != null : "Deadline date is null";
         this.deadline = LocalDateTime.parse(date, INPUT_FORMATTER);
     }

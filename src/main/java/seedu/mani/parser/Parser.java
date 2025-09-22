@@ -5,6 +5,8 @@ import seedu.mani.task.Todo;
 import seedu.mani.task.Event;
 import seedu.mani.ui.Ui;
 
+import java.io.IOException;
+
 
 /**
  * The Parser class is responsible for interpreting user commands.
@@ -14,6 +16,7 @@ import seedu.mani.ui.Ui;
 public class Parser {
 
     private static final String EMPTY_TASK = "Error: There is no task provided, description is empty.";
+    private static final String FILE_PATH = "./data/tasks.txt";
 
     /**
      * Parses through user's command and executes the operation as per input
@@ -23,7 +26,7 @@ public class Parser {
      * @param memory
      * @return
      */
-    public static boolean parse(String userCommand, Ui ui, TaskList memory) {
+    public static boolean parse(String userCommand, Ui ui, TaskList memory) throws IOException {
         if (userCommand == null || userCommand.trim().isEmpty()) {
             ui.errorMessage("No command entered.");
             return false;
@@ -74,7 +77,7 @@ public class Parser {
                 try {
                     String[] parts = remainingMessage.split(" ");
                     int lastInt = Integer.parseInt(parts[0]);
-                    ui.systemMessage(memory.deleteTask(lastInt - 1));
+                    ui.systemMessage(memory.deleteTask(lastInt - 1, FILE_PATH));
                 } catch (NumberFormatException e) {
                     ui.errorMessage("Error: Please provide a valid task number.");
                 }
@@ -95,62 +98,72 @@ public class Parser {
         }
     }
 
-    private static boolean handleTodo(String remainingMessage, Ui ui, TaskList memory) {
+    private static boolean handleTodo(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
             return false;
         }
         remainingMessage = remainingMessage.trim();
-        ui.systemMessage(memory.addTask(new Todo(remainingMessage)));
+        ui.systemMessage(memory.addTask(new Todo(remainingMessage), FILE_PATH));
         return false;
     }
 
-    private static boolean handleDeadline(String remainingMessage, Ui ui, TaskList memory) {
+    private static boolean handleDeadline(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
             return false;
         }
-        if (!remainingMessage.contains("/by")) {
-            ui.systemMessage("Error: Use command /by");
+
+        int byIndex = remainingMessage.indexOf("/by");
+        if (byIndex == -1) {
+            ui.systemMessage("Error: Use /by to specify deadline");
             return false;
         }
-        int index = remainingMessage.indexOf("/by");
-        String task = remainingMessage.split("/")[0].trim();
-        if (task.isEmpty()) {
+
+        String taskDescription = remainingMessage.substring(0, byIndex).trim();
+        String date = remainingMessage.substring(byIndex + 3).trim();
+
+        if (taskDescription.isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
             return false;
         }
-        String date = remainingMessage.substring(index + 3).trim();
         if (date.isEmpty()) {
             ui.systemMessage("Error: No deadline provided.");
             return false;
         }
-        ui.systemMessage(memory.addTask(new Deadline(task, date)));
+
+        ui.systemMessage(memory.addTask(new Deadline(taskDescription, date), FILE_PATH));
         return false;
     }
-    private static boolean handleEvent(String remainingMessage, Ui ui, TaskList memory) {
+
+    private static boolean handleEvent(String remainingMessage, Ui ui, TaskList memory) throws IOException {
         if (remainingMessage.trim().isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
             return false;
         }
-        if (!remainingMessage.contains("/from") || !remainingMessage.contains("/to")) {
-            ui.systemMessage("Error: Use commands /from and /to");
+
+        int fromIndex = remainingMessage.indexOf("/from");
+        int toIndex = remainingMessage.indexOf("/to");
+
+        if (fromIndex == -1 || toIndex == -1) {
+            ui.systemMessage("Error: Use /from and /to to specify event time");
             return false;
         }
-        String eventTask = remainingMessage.split("/")[0].trim();
-        if (eventTask.isEmpty()) {
+
+        String taskDescription = remainingMessage.substring(0, fromIndex).trim();
+        String from = remainingMessage.substring(fromIndex + 5, toIndex).trim();
+        String to = remainingMessage.substring(toIndex + 3).trim();
+
+        if (taskDescription.isEmpty()) {
             ui.systemMessage(EMPTY_TASK);
             return false;
         }
-        int firstIndex = remainingMessage.indexOf("/from") + 5;
-        int secondIndex = remainingMessage.indexOf("/to");
-        String from = remainingMessage.substring(firstIndex, secondIndex).trim();
-        String to = remainingMessage.substring(secondIndex + 3).trim();
         if (from.isEmpty() || to.isEmpty()) {
             ui.systemMessage("Error: From or To is not provided.");
             return false;
         }
-        ui.systemMessage(memory.addTask(new Event(eventTask, from, to)));
+
+        ui.systemMessage(memory.addTask(new Event(taskDescription, from, to), FILE_PATH));
         return false;
     }
 }

@@ -5,6 +5,8 @@ import seedu.mani.storage.Storage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static seedu.mani.storage.Storage.increaseDuplicateCount;
+
 /**
  * Manages a list of tasks and handles operations on them.
  */
@@ -32,24 +34,29 @@ public class TaskList {
     /**
      * Adds a task to the list and updates storage.
      */
-    public String addTask(Task task) {
+    public String addTask(Task task, String filePath) throws IOException {
+        boolean hasDuplicate = this.checkDuplicates(task);
         this.taskList.add(task);
         this.count++;
         try {
-            Storage.appendToFile(FILE_PATH, task.getDetails() + "\n");
+            Storage.appendToFile(filePath, task.getDetails() + "\n");
         } catch (IOException e) {
             System.out.println("Error in saving to file: " + e.getMessage());
         }
-        return "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + String.valueOf(this.count) + " tasks in the list.";
+        return "Got it. I've added this task:\n"
+                + (hasDuplicate ? "(Note this is a duplicate)\n" : "")
+                + task.toString()
+                + "\nNow you have " + String.valueOf(this.count)
+                + " tasks in the list.";
     }
 
     /**
      * Deletes a task from the list and updates storage.
      */
-    public String deleteTask(int i) {
+    public String deleteTask(int i, String filePath) {
         Task tmp = this.taskList.get(i);
         try {
-            Storage.deleteLine(FILE_PATH, i);
+            Storage.deleteLine(filePath, i);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -96,6 +103,25 @@ public class TaskList {
             }
         }
         return output.isEmpty() ? "No matching tasks" : header + output;
+    }
+
+    /**
+     * Checks for duplicates in tasklist, if there is, a number is added to the duplicate.
+     *
+     * @param newTask
+     * @return
+     */
+    public boolean checkDuplicates(Task newTask) throws IOException {
+        int i = 0;
+        for (Task task : this.taskList) {
+            if (task.getTask().equals(newTask.getTask())) {
+                task.sameName();
+                newTask.editTask(newTask.getTask() + task.count());
+                increaseDuplicateCount(FILE_PATH, this.taskList.indexOf(task) + 1);
+                return true;
+            }
+        }
+        return false;
     }
 
 

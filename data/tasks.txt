@@ -1,5 +1,4 @@
-T | 1 | read book
-T | 0 | hi
-T | 1 | hi
-T | 0 | broo
-T | 0 | borrow
+T | 0 | hi | 3
+T | 0 | hi1 | 0
+T | 0 | hi2 | 0
+T | 0 | hi3 | 0

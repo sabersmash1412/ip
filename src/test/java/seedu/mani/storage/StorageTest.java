@@ -60,14 +60,14 @@ public class StorageTest {
      */
     @Test
     public void loadTaskTest() throws IOException {
-        String data = "T | 0 | read book\nT | 1 | return book\n";
+        String data = "T | 0 | read book | 0\nT | 1 | return book | 0\n";
         Storage.writeToFile(TEST, data);
 
         ArrayList<Task> tasks = Storage.loadTasks(TEST);
 
         assertEquals(2, tasks.size());
-        assertEquals("T | 0 | read book", tasks.get(0).getDetails());
-        assertEquals("T | 1 | return book", tasks.get(1).getDetails());
+        assertEquals("T | 0 | read book | 0", tasks.get(0).getDetails());
+        assertEquals("T | 1 | return book | 0", tasks.get(1).getDetails());
         assertFalse(tasks.get(0).isDone());
         assertTrue(tasks.get(1).isDone());
     }

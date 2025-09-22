@@ -20,8 +20,8 @@ public class Todo extends Task {
      * @param task
      * @param mark
      */
-    public Todo(String task, boolean mark) {
-        super(task, mark);
+    public Todo(String task, boolean mark, int count) {
+        super(task, mark, count);
     }
 
     @Override

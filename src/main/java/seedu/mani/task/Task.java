@@ -6,6 +6,7 @@ package seedu.mani.task;
 public class Task {
     private String task;
     private boolean mark;
+    private int count = 0;
 
     /**
      * Constructs a new Task with the given description, initially not marked.
@@ -25,12 +26,25 @@ public class Task {
      * @param task
      * @param mark
      */
-    public Task(String task, boolean mark) {
+    public Task(String task, boolean mark, int count) {
         assert task != null : "Task description is null";
         assert !task.trim().isEmpty() : "Task description is empty";
         this.task = task;
         this.mark = mark;
+        this.count = count;
     }
+
+    /**
+     * Returns the number of duplicates of a task
+     *
+     * @return
+     */
+    public int count() { return this.count; }
+
+    /**
+     * Keeps track of every duplicate count every time its added.
+     */
+    public void sameName() { this.count++; }
 
     /**
      * Marks the task as done and returns its string representation.
@@ -55,7 +69,7 @@ public class Task {
      */
     public String getDetails() {
         String status = mark ? "1" : "0";
-        return status + " | " + task;
+        return status + " | " + task + " | " + this.count;
     }
 
     /**
@@ -63,6 +77,24 @@ public class Task {
      */
     public boolean isDone() {
         return this.mark;
+    }
+
+    /**
+     * Returns task description.
+     *
+     * @return
+     */
+    public String getTask() {
+        return this.task;
+    }
+
+    /**
+     * Edits the name of the task.
+     *
+     * @param taskDescription
+     */
+    public void editTask(String taskDescription) {
+        this.task = taskDescription;
     }
 
     /**

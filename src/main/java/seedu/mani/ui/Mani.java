@@ -34,9 +34,18 @@ public class Mani {
     public void run() {
         ui.welcomeMessage();
 
-        boolean endMani = Parser.parse(ui.readCommand(), ui, memory);
-        while (!endMani) {
+        boolean endMani = false;
+        try {
             endMani = Parser.parse(ui.readCommand(), ui, memory);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        while (!endMani) {
+            try {
+                endMani = Parser.parse(ui.readCommand(), ui, memory);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         ui.goodbyeMessage();
@@ -45,17 +54,21 @@ public class Mani {
 
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();
-        Parser.parse(input, new Ui() {
-            @Override
-            public void systemMessage(String message) {
-                response.append(message).append("\n");
-            }
+        try {
+            Parser.parse(input, new Ui() {
+                @Override
+                public void systemMessage(String message) {
+                    response.append(message).append("\n");
+                }
 
-            @Override
-            public void errorMessage(String message) {
-                response.append("Error: ").append(message).append("\n");
-            }
-        }, memory);
+                @Override
+                public void errorMessage(String message) {
+                    response.append("Error: ").append(message).append("\n");
+                }
+            }, memory);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return response.toString().trim();
     }
 
